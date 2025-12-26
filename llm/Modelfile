@@ -1,0 +1,2 @@
+FROM smollm2:360m
+ADAPTER "./weather_sql_dataset.jsonl"

@@ -1,0 +1,84 @@
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhat is the latest temperature and pressure in Dubai?<|im_end|>
+    <|im_start|>assistant\nSELECT temperature, pressure FROM weather_weatherdata WHERE city = 'Dubai' ORDER BY measured_at DESC LIMIT 1<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nShow me the humidity and wind speed for the latest entry in New York.<|im_end|>
+    <|im_start|>assistant\nSELECT humidity, wind_speed FROM weather_weatherdata WHERE city = 'New York' ORDER BY measured_at DESC LIMIT 1<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nFind the average temperature for London.<|im_end|>
+    <|im_start|>assistant\nSELECT AVG(temperature) FROM weather_weatherdata WHERE city = 'London'<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhat's the maximum temperature ever recorded in Hong Kong?<|im_end|>
+    <|im_start|>assistant\nSELECT MAX(temperature) FROM weather_weatherdata WHERE city = 'Hong Kong'<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhich city had the lowest `feels_like` temperature?<|im_end|>
+    <|im_start|>assistant\nSELECT city FROM weather_weatherdata ORDER BY feels_like ASC LIMIT 1<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhat's the average wind speed in Singapore and Bangkok?<|im_end|>
+    <|im_start|>assistant\nSELECT AVG(wind_speed) FROM weather_weatherdata WHERE city IN ('Singapore', 'Bangkok')<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nList the pressure readings for Tokyo from the last week.<|im_end|>
+    <|im_start|>assistant\nSELECT pressure FROM weather_weatherdata WHERE city = 'Tokyo' AND measured_at >= NOW() - INTERVAL '7 days'<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nShow me all cities where the temperature is over 25 degrees.<|im_end|>
+    <|im_start|>assistant\nSELECT city FROM weather_weatherdata WHERE temperature > 25<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nGive me the current `feels_like` temperature in Istanbul.<|im_end|>
+    <|im_start|>assistant\nSELECT feels_like FROM weather_weatherdata WHERE city = 'Istanbul' ORDER BY measured_at DESC LIMIT 1<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhat are the average `feels_like` and `cloudiness` values for Barcelona?<|im_end|>
+    <|im_start|>assistant\nSELECT AVG(feels_like), AVG(cloudiness) FROM weather_weatherdata WHERE city = 'Barcelona'<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nShow me all data for London where the humidity is between 50 and 60.<|im_end|>
+    <|im_start|>assistant\nSELECT * FROM weather_weatherdata WHERE city = 'London' AND humidity BETWEEN 50 AND 60<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nList the cities and their highest recorded wind speed.<|im_end|>
+    <|im_start|>assistant\nSELECT city, MAX(wind_speed) FROM weather_weatherdata GROUP BY city<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nWhat is the total number of records for New York?<|im_end|>
+    <|im_start|>assistant\nSELECT COUNT(*) FROM weather_weatherdata WHERE city = 'New York'<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nGive me the latest pressure reading for all cities.<|im_end|>
+    <|im_start|>assistant\nSELECT city, pressure FROM weather_weatherdata ORDER BY measured_at DESC<|im_end|>
+"}
+{"text": "
+    <|im_start|>system\nDatabase Schema: weather_weatherdata(id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure)<|im_end|>
+    <|im_start|>user\nGet all data for London where `feels_like` is less than 10 degrees.<|im_end|>
+    <|im_start|>assistant\nSELECT * FROM weather_weatherdata WHERE city = 'London' AND feels_like < 10<|im_end|>
+"}
+
+{"messages": [{"role": "system", "content": "You are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai."}, {"role": "user", "content": "Show me the weather in Barcelona "}, {"role": "assistant", "content": "SELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;"}]}
+{"messages": [{"role": "system", "content": "You are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai."}, {"role": "user", "content": "What's the weather in Barcelona"}, {"role": "assistant", "content": "SELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;"}]}
+{"messages": [{"role": "system", "content": "You are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai."}, {"role": "user", "content": "How's the weather in Barcelona"}, {"role": "assistant", "content": "SELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;"}]}
+
+
+{"text": "<|im_start|>system\nYou are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai.<|im_end|><|im_start|>user\nShow me the weather in Barcelona <|im_end|><|im_start|>assistant\nSELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;<|im_end|>"}
+{"text": "<|im_start|>system\nYou are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai.<|im_end|><|im_start|>user\nWhat's the weather in Barcelona<|im_end|><|im_start|>assistant\nSELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;<|im_end|>"}
+{"text": "<|im_start|>system\nYou are a helpful SQL assistant that generates PostgreSQL queries for weather data. The table 'weather_weatherdata' has columns: id, city, temperature, humidity, recorded_at, wind_speed, cloudiness, feels_like, measured_at, pressure. Available cities: Barcelona, London, Paris, Hong Kong, New York, Istanbul, Singapore, Bangkok, Tokyo, Dubai.<|im_end|><|im_start|>user\nHow's the weather in Barcelona<|im_end|><|im_start|>assistant\nSELECT * FROM weather_weatherdata WHERE city = 'Barcelona' ORDER BY measured_at DESC LIMIT 1 ;<|im_end|>"}
