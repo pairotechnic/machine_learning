@@ -1,16 +1,17 @@
+# Standard Library Imports
+
+# Third-party Library Imports
 import numpy as np
 # matplotlib.use("TkAgg") # or "QtAgg"
 import matplotlib
 import matplotlib.pyplot as plt
 print(f"matplotlib backend : {matplotlib.get_backend()}")
-
 # works only in Jupyter Notebook environments
 # %matplotlib widget 
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\deeplearning.mplstyle")
-from lab_utils_uni import plt_intuition, plt_stationary, plt_update_onclick, soup_bowl
 
-x_train = np.array([1.0, 2.0]) # unit of size is 1000 sq.ft.
-y_train = np.array([300.0, 500.0]) # unit of price is 1000 dollars
+# Local Application Imports
+plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+from utils.lab_utils_uni import plt_intuition, plt_stationary, plt_update_onclick, soup_bowl
 
 def compute_cost(x, y, w, b):
     """
@@ -37,21 +38,28 @@ def compute_cost(x, y, w, b):
 
     return total_cost
 
-# Comes from a local import in the course's Cost Function Jupyter Notebook 
-# b is fixed, only w variable, creates 2d cost function
-plt_intuition(x_train,y_train)
+def main():
 
-# Larger data set that doesn't exactly fit a line
-x_train = np.array([1.0, 1.7, 2.0, 2.5, 3.0, 3.2])
-y_train = np.array([250, 300, 480, 430, 630, 730,])
+    x_train = np.array([1.0, 2.0]) # unit of size is 1000 sq.ft.
+    y_train = np.array([300.0, 500.0]) # unit of price is 1000 dollars
+    
+    # Comes from a local import in the course's Cost Function Jupyter Notebook 
+    # b is fixed, only w variable, creates 2d cost function
+    plt_intuition(x_train,y_train)
 
-# w and b both variables
-# creates 3d cost function
-# approximately  𝑤=209 and  𝑏=2.4 provide lowest cost
-plt.close('all')
-fig, ax, dyn_items = plt_stationary(x_train, y_train)
-updater = plt_update_onclick(fig, ax, x_train, y_train, dyn_items)
+    # Larger data set that doesn't exactly fit a line
+    x_train = np.array([1.0, 1.7, 2.0, 2.5, 3.0, 3.2])
+    y_train = np.array([250, 300, 480, 430, 630, 730,])
 
-# Another 3d surface plot (Convex cost durface)
-soup_bowl()
+    # w and b both variables
+    # creates 3d cost function
+    # approximately  𝑤=209 and  𝑏=2.4 provide lowest cost
+    plt.close('all')
+    fig, ax, dyn_items = plt_stationary(x_train, y_train)
+    updater = plt_update_onclick(fig, ax, x_train, y_train, dyn_items)
 
+    # Another 3d surface plot (Convex cost durface)
+    soup_bowl()
+
+if __name__ == "__main__":
+    main()
