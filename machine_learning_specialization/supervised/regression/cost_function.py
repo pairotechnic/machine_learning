@@ -11,7 +11,7 @@ print(f"matplotlib backend : {matplotlib.get_backend()}")
 
 # Local Application Imports
 plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
-from utils.lab_utils_uni import plt_intuition, plt_stationary, plt_update_onclick, soup_bowl
+from machine_learning_specialization.supervised.regression.utils.lab_utils_uni import plt_intuition, plt_stationary, plt_update_onclick, soup_bowl
 
 def compute_cost(x, y, w, b):
     """
