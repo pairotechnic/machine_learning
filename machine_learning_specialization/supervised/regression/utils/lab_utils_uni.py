@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from matplotlib.gridspec import GridSpec
 from matplotlib.colors import LinearSegmentedColormap
-from ipywidgets import interact
+from matplotlib.widgets import Slider
 from machine_learning_specialization.supervised.regression.utils.lab_utils_common import compute_cost, dlblue, dlorange, dldarkred, dlmagenta, dlpurple, dlcolors
 plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 n_bin = 5
@@ -62,46 +62,88 @@ def mk_cost_lines(x,y,w,b, ax):
 
 
 def plt_intuition(x_train, y_train):
-
-    w_range = np.array([200-200,200+200])
+    w_range = np.array([200-200, 200+200])
     tmp_b = 100
-
     w_array = np.arange(*w_range, 5)
     cost = np.zeros_like(w_array)
     for i in range(len(w_array)):
         tmp_w = w_array[i]
         cost[i] = compute_cost(x_train, y_train, tmp_w, tmp_b)
 
-    @interact(w=(*w_range,10),continuous_update=False)
-    def func( w=150):
+    w_init = 150
+
+    fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(8, 4))
+    plt.subplots_adjust(bottom=0.22)
+
+    # --- initial draw ---
+    f_wb = np.dot(x_train, w_init) + tmp_b
+    mk_cost_lines(x_train, y_train, w_init, tmp_b, ax[0])
+    plt_house_x(x_train, y_train, f_wb=f_wb, ax=ax[0])
+
+    ax[1].plot(w_array, cost)
+    cur_cost = compute_cost(x_train, y_train, w_init, tmp_b)
+    scat = ax[1].scatter(w_init, cur_cost, s=100, color=dldarkred, zorder=10,
+                          label=f"cost at w={w_init}")
+
+    ax[1].set_title("Cost vs. w, (b fixed at 100)")
+    ax[1].set_ylabel('Cost')
+    ax[1].set_xlabel('w')
+
+    # --- FIX: lock the axis limits once, based on the full w_array/cost range ---
+    x_lo, x_hi = w_range[0], w_range[1]
+    y_lo, y_hi = 0, cost.max() * 1.05
+    ax[1].set_xlim(x_lo, x_hi)
+    ax[1].set_ylim(y_lo, y_hi)
+    ax[1].autoscale(False)          # <-- prevents any future autoscaling/drift
+
+    hline = ax[1].hlines(cur_cost, x_lo, w_init, lw=4, color=dlpurple, ls='dotted')
+    vline = ax[1].vlines(w_init, y_lo, cur_cost, lw=4, color=dlpurple, ls='dotted')
+    ax[1].legend(loc='upper center')
+    fig.suptitle(f"Minimize Cost: Current Cost = {cur_cost:0.0f}", fontsize=12)
+
+    slider_ax = fig.add_axes([0.25, 0.06, 0.5, 0.03])
+    w_slider = Slider(slider_ax, 'w', w_range[0], w_range[1], valinit=w_init, valstep=10)
+
+    dyn = {'scat': scat, 'hline': hline, 'vline': vline}
+
+    def update(val):
+        w = w_slider.val
         f_wb = np.dot(x_train, w) + tmp_b
 
-        fig, ax = plt.subplots(1, 2, constrained_layout=True, figsize=(8,4))
-        fig.canvas.toolbar_position = 'bottom'
-
+        ax[0].clear()
         mk_cost_lines(x_train, y_train, w, tmp_b, ax[0])
         plt_house_x(x_train, y_train, f_wb=f_wb, ax=ax[0])
 
-        ax[1].plot(w_array, cost)
+        dyn['scat'].remove()
+        dyn['hline'].remove()
+        dyn['vline'].remove()
+
         cur_cost = compute_cost(x_train, y_train, w, tmp_b)
-        ax[1].scatter(w,cur_cost, s=100, color=dldarkred, zorder= 10, label= f"cost at w={w}")
-        ax[1].hlines(cur_cost, ax[1].get_xlim()[0],w, lw=4, color=dlpurple, ls='dotted')
-        ax[1].vlines(w, ax[1].get_ylim()[0],cur_cost, lw=4, color=dlpurple, ls='dotted')
-        ax[1].set_title("Cost vs. w, (b fixed at 100)")
-        ax[1].set_ylabel('Cost')
-        ax[1].set_xlabel('w')
+        dyn['scat'] = ax[1].scatter(w, cur_cost, s=100, color=dldarkred, zorder=10,
+                                     label=f"cost at w={w:.0f}")
+        # use the FIXED x_lo, y_lo captured above, not ax[1].get_xlim()/get_ylim()
+        dyn['hline'] = ax[1].hlines(cur_cost, x_lo, w, lw=4, color=dlpurple, ls='dotted')
+        dyn['vline'] = ax[1].vlines(w, y_lo, cur_cost, lw=4, color=dlpurple, ls='dotted')
+
         ax[1].legend(loc='upper center')
         fig.suptitle(f"Minimize Cost: Current Cost = {cur_cost:0.0f}", fontsize=12)
-        plt.show()
+        fig.canvas.draw_idle()
 
+    w_slider.on_changed(update)
+    plt.show()
+
+    return w_slider
 # this is the 2D cost curve with interactive slider
 def plt_stationary(x_train, y_train):
     # setup figure
-    fig = plt.figure( figsize=(9,8))
-    #fig = plt.figure(constrained_layout=True,  figsize=(12,10))
+    fig = plt.figure(figsize=(9,8))
     fig.set_facecolor('#ffffff') #white
-    fig.canvas.toolbar_position = 'top'
-    #gs = GridSpec(2, 2, figure=fig, wspace = 0.01)
+
+    # 'toolbar_position' only exists on the ipympl (Jupyter widget) canvas.
+    # Guard it so the script doesn't crash on TkAgg/QtAgg/etc.
+    if hasattr(fig.canvas, 'toolbar_position'):
+        fig.canvas.toolbar_position = 'top'
+
     gs = GridSpec(2, 2, figure=fig)
     ax0 = fig.add_subplot(gs[0, 0])
     ax1 = fig.add_subplot(gs[0, 1])

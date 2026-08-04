@@ -57,6 +57,7 @@ def main():
     plt.close('all')
     fig, ax, dyn_items = plt_stationary(x_train, y_train)
     updater = plt_update_onclick(fig, ax, x_train, y_train, dyn_items)
+    plt.show()
 
     # Another 3d surface plot (Convex cost durface)
     soup_bowl()
