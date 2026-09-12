@@ -1,12 +1,18 @@
-import numpy as np
+# Standard Library Imports
 import copy
 import math
-from scipy.stats import norm
+
+# Third-Party Library Imports
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import axes3d
 from matplotlib.ticker import MaxNLocator
+from mpl_toolkits.mplot3d import axes3d
+import numpy as np
+from scipy.stats import norm
+
+# Local Application Imports
+plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+
 dlblue = '#0096ff'; dlorange = '#FF9300'; dldarkred='#C00000'; dlmagenta='#FF40FF'; dlpurple='#7030A0'; 
-plt.style.use('./deeplearning.mplstyle')
 
 def load_data_multi():
     data = np.loadtxt("data/ex1data2.txt", delimiter=',')
@@ -64,7 +70,7 @@ def inbounds(a,b,xlim,ylim):
     else:
         return(False)
 
-from mpl_toolkits.mplot3d import axes3d
+
 def plt_contour_wgrad(x, y, hist, ax, w_range=[-100, 500, 5], b_range=[-500, 500, 5], 
                 contours = [0.1,50,1000,5000,10000,25000,50000], 
                       resolution=5, w_final=200, b_final=100,step=10 ):

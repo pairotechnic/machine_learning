@@ -1,5 +1,10 @@
-import numpy as np
+# Standard Library Imports
+
+# Third-Party Library Imports
 import matplotlib.pyplot as plt
+import numpy as np
+
+# Local Application Imports
 plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 
 def define_training_data_and_get_count():

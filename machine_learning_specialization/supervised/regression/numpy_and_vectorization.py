@@ -3,8 +3,13 @@ A brief introduction to some of the scientific computing used in this course.
 In particular the NumPy scientific computing package and its use with python.
 """
 
-import numpy as np    # it is an unofficial standard to use np for numpy
+# Standard Library Imports
 import time
+
+# Third-Party Library Imports
+import numpy as np    # it is an unofficial standard to use np for numpy
+
+# Local Application Imports
 
 ##################################################
 # VECTOR CREATION

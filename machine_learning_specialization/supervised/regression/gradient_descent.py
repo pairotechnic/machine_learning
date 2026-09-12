@@ -2,12 +2,12 @@
 import math
 
 # Third-party Library Imports
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Local Application Imports
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 from machine_learning_specialization.supervised.regression.utils.lab_utils_uni import plt_house_x, plt_contour_wgrad, plt_divergence, plt_gradients
+plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 
 # Function to calculate the cost
 def compute_cost(x, y, w, b):

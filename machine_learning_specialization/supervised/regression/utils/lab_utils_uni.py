@@ -2,14 +2,21 @@
 lab_utils_uni.py
     routines used in Course 1, Week2, labs1-3 dealing with single variables (univariate)
 """
-import numpy as np
+
+# Standard Library Imports
+
+# Third-Party Library Imports
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.gridspec import GridSpec
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
-from matplotlib.gridspec import GridSpec
-from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.widgets import Slider
+import numpy as np
+
+# Local Application Imports
 from machine_learning_specialization.supervised.regression.utils.lab_utils_common import compute_cost, dlblue, dlorange, dldarkred, dlmagenta, dlpurple, dlcolors
 plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+
 n_bin = 5
 dlcm = LinearSegmentedColormap.from_list(
         'dl_map', dlcolors, N=n_bin)
