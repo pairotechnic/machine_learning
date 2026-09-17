@@ -9,8 +9,7 @@ from machine_learning_specialization.supervised.regression.utils.lab_utils_multi
 
 np.set_printoptions(precision=2)  # reduced display precision on numpy arrays
 
-
-def main():
+def fit_line_to_curve():
     # create target data
     x = np.arange(0, 20, 1)
     y = 1 + x**2
@@ -21,6 +20,7 @@ def main():
     plt.scatter(x, y, marker='x', c='r', label="Actual Value"); plt.title("no feature engineering")
     plt.plot(x,X@model_w + model_b, label="Predicted Value");  plt.xlabel("X"); plt.ylabel("y"); plt.legend(); plt.show()
 
+def fit_curve_to_curve():
     # create target data
     x = np.arange(0, 20, 1)
     y = 1 + x**2
@@ -34,6 +34,13 @@ def main():
     plt.scatter(x, y, marker='x', c='r', label="Actual Value"); plt.title("Added x**2 feature")
     plt.plot(x, np.dot(X,model_w) + model_b, label="Predicted Value"); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+def fit_high_degree_polynomial_to_curve():
+    """
+    It may not always be obvious which features are required. 
+    One could add a variety of potential features to try and find the most useful.
+    Here we have added the features x, x^2, x^3, because we don't know which ones are important
+    Using gradient descent we can identify which ones are important, by the magnitude of their weights/parameters
+    """
     # create target data
     x = np.arange(0, 20, 1)
     y = x**2
@@ -46,6 +53,7 @@ def main():
     plt.scatter(x, y, marker='x', c='r', label="Actual Value"); plt.title("x, x**2, x**3 features")
     plt.plot(x, X@model_w + model_b, label="Predicted Value"); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+def find_feature_that_plots_straight_line_against_target_data():
     # create target data
     x = np.arange(0, 20, 1)
     y = x**2
@@ -61,6 +69,11 @@ def main():
     ax[0].set_ylabel("y")
     plt.show()
 
+def scale_features():
+    """
+    When we have features with widely varying ranges, they need to be scaled to comparable ranges
+    This allows efficient gradient descent
+    """
     # create target data
     x = np.arange(0,20,1)
     X = np.c_[x, x**2, x**3]
@@ -81,6 +94,11 @@ def main():
     plt.scatter(x, y, marker='x', c='r', label="Actual Value"); plt.title("Normalized x x**2, x**3 feature")
     plt.plot(x,X@model_w + model_b, label="Predicted Value"); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+def scale_features_of_complex_functions():
+    """
+    linear regression can model complex, even highly non-linear functions using feature engineering
+    it is important to apply feature scaling when doing feature engineering, for efficient gradient descent
+    """
     x = np.arange(0,20,1)
     y = np.cos(x/2)
 
@@ -92,5 +110,14 @@ def main():
     plt.scatter(x, y, marker='x', c='r', label="Actual Value"); plt.title("Normalized x x**2, x**3 feature")
     plt.plot(x,X@model_w + model_b, label="Predicted Value"); plt.xlabel("x"); plt.ylabel("y"); plt.legend(); plt.show()
 
+
+def main():
+    fit_line_to_curve()
+    fit_curve_to_curve()
+    fit_high_degree_polynomial_to_curve() # Used for selecting features
+    find_feature_that_plots_straight_line_against_target_data()
+    scale_features()
+    scale_features_of_complex_functions()
+
 if __name__ == "__main__":
-    main()
+    main() 
