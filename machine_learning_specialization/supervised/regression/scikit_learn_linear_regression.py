@@ -10,8 +10,10 @@ from sklearn.preprocessing import StandardScaler
 from machine_learning_specialization.supervised.regression.utils.lab_utils_common import dlc
 from machine_learning_specialization.supervised.regression.utils.lab_utils_multi import  load_house_data
 
+
+# Library Configurations
 np.set_printoptions(precision=2)
-plt.style.use('./deeplearning.mplstyle')
+plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 
 def normalize_data(X_train):
     # Scale/normalize the training data
