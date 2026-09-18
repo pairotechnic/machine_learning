@@ -15,7 +15,7 @@ plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils
 dlblue = '#0096ff'; dlorange = '#FF9300'; dldarkred='#C00000'; dlmagenta='#FF40FF'; dlpurple='#7030A0'; 
 
 def load_data_multi():
-    data = np.loadtxt("data/ex1data2.txt", delimiter=',')
+    data = np.loadtxt(".\\machine_learning_specialization\\supervised\\regression\\data\\ex1data2.txt", delimiter=',')
     X = data[:,:2]
     y = data[:,2]
     return X, y
