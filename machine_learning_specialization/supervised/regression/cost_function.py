@@ -6,12 +6,14 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 print(f"matplotlib backend : {matplotlib.get_backend()}")
-# works only in Jupyter Notebook environments
-# %matplotlib widget 
 
 # Local Application Imports
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 from machine_learning_specialization.supervised.regression.utils.lab_utils_uni import plt_intuition, plt_stationary, plt_update_onclick, soup_bowl
+
+# Library Configurations
+# works only in Jupyter Notebook environments
+# %matplotlib widget 
+plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
 
 def compute_cost(x, y, w, b):
     """

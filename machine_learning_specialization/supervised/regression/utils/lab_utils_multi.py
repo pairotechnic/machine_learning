@@ -10,7 +10,9 @@ import numpy as np
 from scipy.stats import norm
 
 # Local Application Imports
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+
+# Library Configurations
+plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
 
 dlblue = '#0096ff'; dlorange = '#FF9300'; dldarkred='#C00000'; dlmagenta='#FF40FF'; dlpurple='#7030A0'; 
 

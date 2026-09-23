@@ -9,8 +9,9 @@ from machine_learning_specialization.supervised.regression.utils.lab_utils_commo
 from machine_learning_specialization.supervised.regression.utils.lab_utils_multi import  (
     load_house_data, run_gradient_descent, norm_plot, plt_equal_scale, plot_cost_i_w
 )
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
 
+# Library Configurations
+plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
 np.set_printoptions(precision=2)
 
 def zscore_normalize_features(X):

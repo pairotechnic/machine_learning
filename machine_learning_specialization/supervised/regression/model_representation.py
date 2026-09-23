@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Local Application Imports
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+
+# Library Configurations
+plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
 
 def define_training_data_and_get_count():
     x_train = np.array([1.0, 2.0]) # input variable

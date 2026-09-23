@@ -13,7 +13,7 @@ from machine_learning_specialization.supervised.regression.utils.lab_utils_multi
 
 # Library Configurations
 np.set_printoptions(precision=2)
-plt.style.use(".\\machine_learning_specialization\\supervised\\regression\\utils\\deeplearning.mplstyle")
+plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
 
 def normalize_data(X_train):
     # Scale/normalize the training data
