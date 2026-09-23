@@ -50,6 +50,7 @@ def main():
     b_in = 0
     plt.close('all') 
     addpt = plt_one_addpt_onclick( x_train,y_train, w_in, b_in, logistic=False)
+    plt.show()
 
 
 if __name__ == "__main__":
