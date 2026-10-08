@@ -61,7 +61,6 @@ def plot_decision_boundary(X, y):
     plt.show()
 
 def main():
-
     X, y = create_datasets()
     plot_datapoints(X, y)
     plot_z_against_sigmoid_z()
