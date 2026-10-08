@@ -300,3 +300,4 @@ def draw_vthresh(ax,x):
         arrowstyle='simple, head_width=5, head_length=10, tail_width=0.0',
     )
     ax.add_artist(f)
+    plt.show()
