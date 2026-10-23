@@ -2,8 +2,13 @@
  logistic_loss plotting routines and support
 """
 
+# Standard Library Imports
+
+# Third-Party Library Imports
 from matplotlib import cm
-from lab_utils_common import sigmoid, dlblue, dlorange, np, plt, compute_cost_matrix
+
+# Local Application Imports
+from machine_learning_specialization.supervised.classification.utils.lab_utils_common import sigmoid, dlblue, dlorange, np, plt, compute_cost_matrix
 
 def compute_cost_logistic_sq_err(X, y, w, b):
     """
@@ -156,6 +161,8 @@ def plt_simple_example(x, y):
     ax.set_xlabel('Tumor Size')
     ax.legend(loc='lower right')
     ax.set_title("Example of Logistic Regression on Categorical Data")
+
+    plt.show()
 
 
 def plt_two_logistic_loss_curves():
