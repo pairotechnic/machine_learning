@@ -17,7 +17,7 @@ import numpy as np
 from machine_learning_specialization.supervised.regression.utils.lab_utils_common import compute_cost, dlblue, dlorange, dldarkred, dlmagenta, dlpurple, dlcolors
 
 # Library Configurations
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
 n_bin = 5
 dlcm = LinearSegmentedColormap.from_list(

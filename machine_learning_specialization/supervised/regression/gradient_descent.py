@@ -9,7 +9,7 @@ import numpy as np
 from machine_learning_specialization.supervised.regression.utils.lab_utils_uni import plt_house_x, plt_contour_wgrad, plt_divergence, plt_gradients
 
 # Library Configurations
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
 # Function to calculate the cost
 def compute_cost(x, y, w, b):

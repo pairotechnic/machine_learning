@@ -13,7 +13,7 @@ from machine_learning_specialization.supervised.regression.utils.lab_utils_uni i
 # Library Configurations
 # works only in Jupyter Notebook environments
 # %matplotlib widget 
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
 def compute_cost(x, y, w, b):
     """

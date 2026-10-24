@@ -8,7 +8,7 @@ import numpy as np
 # Local Application Imports
 
 # Library Configurations
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 np.set_printoptions(precision=2)  # reduced display precision on numpy arrays
 
 def predict_with_for_loop(x, w, b): 

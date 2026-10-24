@@ -10,7 +10,7 @@ from machine_learning_specialization.supervised.classification.utils.plt_one_add
 
 # Library Configurations
 # %matplotlib widget # works only in Jupyter Notebook environments
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
 def create_datasets():
     # Define 1D and 2D datasets, with corresponding outputs

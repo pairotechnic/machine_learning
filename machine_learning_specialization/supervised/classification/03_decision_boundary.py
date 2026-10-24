@@ -9,7 +9,7 @@ from machine_learning_specialization.supervised.classification.utils.lab_utils_c
 
 # Library Configurations
 # %matplotlib widget # works only in Jupyter Notebook environments
-plt.style.use(".\\machine_learning_specialization\\supervised\\utils\\deeplearning.mplstyle")
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
 def create_datasets():
     X = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
