@@ -1,15 +1,26 @@
+# Standard Library Imports
+
+# Third-Party Library Imports
 import numpy as np
-
-X = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-y = np.array([0, 0, 0, 1, 1, 1])
-
 from sklearn.linear_model import LogisticRegression
 
-lr_model = LogisticRegression()
-lr_model.fit(X, y)
+# Local Application Imports
+from machine_learning_specialization.supervised.classification.utils.helpers import create_datasets
 
-y_pred = lr_model.predict(X)
+def main():
+    X, y = create_datasets
 
-print("Prediction on training set:", y_pred)
+    # Create the model, and fit it on the data
+    lr_model = LogisticRegression()
+    lr_model.fit(X, y)
 
-print("Accuracy on training set:", lr_model.score(X, y))
+    # Make predictions on the dataset
+    y_pred = lr_model.predict(X)
+    print("Prediction on training set:", y_pred)
+
+    # Calculate accuracy of the model's predictions wrt the true labels
+    print("Accuracy on training set:", lr_model.score(X, y))
+
+
+if __name__ == "__main__":
+    main()
