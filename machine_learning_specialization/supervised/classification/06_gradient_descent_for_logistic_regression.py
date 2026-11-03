@@ -9,6 +9,7 @@ import numpy as np
 # Local Application Imports
 from machine_learning_specialization.supervised.classification.utils.lab_utils_common import  dlc, plot_data, plt_tumor_data, sigmoid, compute_cost_logistic
 from machine_learning_specialization.supervised.classification.utils.plt_quad_logistic import plt_quad_logistic, plt_prob
+from machine_learning_specialization.supervised.classification.utils.helpers import create_datasets, plot_datapoints
 
 # Library Configurations
 # %matplotlib widget # works only in Jupyter Notebook environments
@@ -83,36 +84,7 @@ def gradient_descent(X, y, w_in, b_in, alpha, num_iters):
         
     return w, b, J_history         #return final w,b and J history for graphing
 
-def main():
-    X_train = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-    y_train = np.array([0, 0, 0, 1, 1, 1])
-
-    fig,ax = plt.subplots(1,1,figsize=(4,4))
-    plot_data(X_train, y_train, ax)
-
-    ax.axis([0, 4, 0, 3.5])
-    ax.set_ylabel('$x_1$', fontsize=12)
-    ax.set_xlabel('$x_0$', fontsize=12)
-    plt.show()
-
-
-    X_tmp = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-    y_tmp = np.array([0, 0, 0, 1, 1, 1])
-    w_tmp = np.array([2.,3.])
-    b_tmp = 1.
-    dj_db_tmp, dj_dw_tmp = compute_gradient_logistic(X_tmp, y_tmp, w_tmp, b_tmp)
-    print(f"dj_db: {dj_db_tmp}" )
-    print(f"dj_dw: {dj_dw_tmp.tolist()}" )
-
-
-    w_tmp  = np.zeros_like(X_train[0])
-    b_tmp  = 0.
-    alph = 0.1
-    iters = 10000
-
-    w_out, b_out, _ = gradient_descent(X_train, y_train, w_tmp, b_tmp, alph, iters) 
-    print(f"\nupdated parameters: w:{w_out}, b:{b_out}")
-
+def plot_gradient_descent_results(w_out, b_out, X_train, y_train):
     fig,ax = plt.subplots(1,1,figsize=(5,4))
     # plot the probability 
     plt_prob(ax, w_out, b_out)
@@ -129,9 +101,35 @@ def main():
     ax.plot([0,x0],[x1,0], c=dlc["dlblue"], lw=1)
     plt.show()
 
+
+def main():
+    X_train, y_train = create_datasets()
+
+    plot_datapoints(X_train, y_train)
+
+    # Check the implementation of the gradient function
+    X_tmp, y_tmp = create_datasets()
+    w_tmp = np.array([2.,3.])
+    b_tmp = 1.
+    dj_db_tmp, dj_dw_tmp = compute_gradient_logistic(X_tmp, y_tmp, w_tmp, b_tmp)
+    print(f"dj_db: {dj_db_tmp}" )
+    print(f"dj_dw: {dj_dw_tmp.tolist()}" )
+
+    # Run gradient descent on the initial dataset
+    w_tmp  = np.zeros_like(X_train[0])
+    b_tmp  = 0.
+    alph = 0.1
+    iters = 10000
+    w_out, b_out, _ = gradient_descent(X_train, y_train, w_tmp, b_tmp, alph, iters) 
+    print(f"\nupdated parameters: w:{w_out}, b:{b_out}")
+
+    plot_gradient_descent_results(w_out, b_out, X_train, y_train)
+
+    # Create another dataset
     x_train = np.array([0., 1, 2, 3, 4, 5])
     y_train = np.array([0,  0, 0, 1, 1, 1])
 
+    # Plot it
     fig,ax = plt.subplots(1,1,figsize=(4,3))
     plt_tumor_data(x_train, y_train, ax)
     plt.show()
