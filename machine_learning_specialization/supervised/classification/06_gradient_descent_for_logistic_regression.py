@@ -1,34 +1,32 @@
-import copy, math
-import numpy as np
-%matplotlib widget
+# Standard Library Imports
+import copy
+import math
+
+# Third-Party Library Imports
 import matplotlib.pyplot as plt
-from lab_utils_common import  dlc, plot_data, plt_tumor_data, sigmoid, compute_cost_logistic
-from plt_quad_logistic import plt_quad_logistic, plt_prob
-plt.style.use('./deeplearning.mplstyle')
+import numpy as np
 
-X_train = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-y_train = np.array([0, 0, 0, 1, 1, 1])
+# Local Application Imports
+from machine_learning_specialization.supervised.classification.utils.lab_utils_common import  dlc, plot_data, plt_tumor_data, sigmoid, compute_cost_logistic
+from machine_learning_specialization.supervised.classification.utils.plt_quad_logistic import plt_quad_logistic, plt_prob
 
-fig,ax = plt.subplots(1,1,figsize=(4,4))
-plot_data(X_train, y_train, ax)
+# Library Configurations
+# %matplotlib widget # works only in Jupyter Notebook environments
+plt.style.use("./machine_learning_specialization/supervised/utils/deeplearning.mplstyle")
 
-ax.axis([0, 4, 0, 3.5])
-ax.set_ylabel('$x_1$', fontsize=12)
-ax.set_xlabel('$x_0$', fontsize=12)
-plt.show()
 
 def compute_gradient_logistic(X, y, w, b): 
     """
     Computes the gradient for logistic regression 
- 
+
     Args:
-      X (ndarray (m,n): Data, m examples with n features
-      y (ndarray (m,)): target values
-      w (ndarray (n,)): model parameters  
-      b (scalar)      : model parameter
+    X (ndarray (m,n): Data, m examples with n features
+    y (ndarray (m,)): target values
+    w (ndarray (n,)): model parameters  
+    b (scalar)      : model parameter
     Returns
-      dj_dw (ndarray (n,)): The gradient of the cost w.r.t. the parameters w. 
-      dj_db (scalar)      : The gradient of the cost w.r.t. the parameter b. 
+    dj_dw (ndarray (n,)): The gradient of the cost w.r.t. the parameters w. 
+    dj_db (scalar)      : The gradient of the cost w.r.t. the parameter b. 
     """
     m,n = X.shape
     dj_dw = np.zeros((n,))                           #(n,)
@@ -45,29 +43,22 @@ def compute_gradient_logistic(X, y, w, b):
         
     return dj_db, dj_dw  
 
-X_tmp = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
-y_tmp = np.array([0, 0, 0, 1, 1, 1])
-w_tmp = np.array([2.,3.])
-b_tmp = 1.
-dj_db_tmp, dj_dw_tmp = compute_gradient_logistic(X_tmp, y_tmp, w_tmp, b_tmp)
-print(f"dj_db: {dj_db_tmp}" )
-print(f"dj_dw: {dj_dw_tmp.tolist()}" )
 
 def gradient_descent(X, y, w_in, b_in, alpha, num_iters): 
     """
     Performs batch gradient descent
     
     Args:
-      X (ndarray (m,n)   : Data, m examples with n features
-      y (ndarray (m,))   : target values
-      w_in (ndarray (n,)): Initial values of model parameters  
-      b_in (scalar)      : Initial values of model parameter
-      alpha (float)      : Learning rate
-      num_iters (scalar) : number of iterations to run gradient descent
-      
+    X (ndarray (m,n)   : Data, m examples with n features
+    y (ndarray (m,))   : target values
+    w_in (ndarray (n,)): Initial values of model parameters  
+    b_in (scalar)      : Initial values of model parameter
+    alpha (float)      : Learning rate
+    num_iters (scalar) : number of iterations to run gradient descent
+    
     Returns:
-      w (ndarray (n,))   : Updated values of parameters
-      b (scalar)         : Updated value of parameter 
+    w (ndarray (n,))   : Updated values of parameters
+    b (scalar)         : Updated value of parameter 
     """
     # An array to store cost J and w's at each iteration primarily for graphing later
     J_history = []
@@ -81,7 +72,7 @@ def gradient_descent(X, y, w_in, b_in, alpha, num_iters):
         # Update Parameters using w, b, alpha and gradient
         w = w - alpha * dj_dw               
         b = b - alpha * dj_db               
-      
+    
         # Save cost J at each iteration
         if i<100000:      # prevent resource exhaustion 
             J_history.append( compute_cost_logistic(X, y, w, b) )
@@ -92,37 +83,62 @@ def gradient_descent(X, y, w_in, b_in, alpha, num_iters):
         
     return w, b, J_history         #return final w,b and J history for graphing
 
-w_tmp  = np.zeros_like(X_train[0])
-b_tmp  = 0.
-alph = 0.1
-iters = 10000
+def main():
+    X_train = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
+    y_train = np.array([0, 0, 0, 1, 1, 1])
 
-w_out, b_out, _ = gradient_descent(X_train, y_train, w_tmp, b_tmp, alph, iters) 
-print(f"\nupdated parameters: w:{w_out}, b:{b_out}")
+    fig,ax = plt.subplots(1,1,figsize=(4,4))
+    plot_data(X_train, y_train, ax)
 
-fig,ax = plt.subplots(1,1,figsize=(5,4))
-# plot the probability 
-plt_prob(ax, w_out, b_out)
+    ax.axis([0, 4, 0, 3.5])
+    ax.set_ylabel('$x_1$', fontsize=12)
+    ax.set_xlabel('$x_0$', fontsize=12)
+    plt.show()
 
-# Plot the original data
-ax.set_ylabel(r'$x_1$')
-ax.set_xlabel(r'$x_0$')   
-ax.axis([0, 4, 0, 3.5])
-plot_data(X_train,y_train,ax)
 
-# Plot the decision boundary
-x0 = -b_out/w_out[0]
-x1 = -b_out/w_out[1]
-ax.plot([0,x0],[x1,0], c=dlc["dlblue"], lw=1)
-plt.show()
+    X_tmp = np.array([[0.5, 1.5], [1,1], [1.5, 0.5], [3, 0.5], [2, 2], [1, 2.5]])
+    y_tmp = np.array([0, 0, 0, 1, 1, 1])
+    w_tmp = np.array([2.,3.])
+    b_tmp = 1.
+    dj_db_tmp, dj_dw_tmp = compute_gradient_logistic(X_tmp, y_tmp, w_tmp, b_tmp)
+    print(f"dj_db: {dj_db_tmp}" )
+    print(f"dj_dw: {dj_dw_tmp.tolist()}" )
 
-x_train = np.array([0., 1, 2, 3, 4, 5])
-y_train = np.array([0,  0, 0, 1, 1, 1])
 
-fig,ax = plt.subplots(1,1,figsize=(4,3))
-plt_tumor_data(x_train, y_train, ax)
-plt.show()
+    w_tmp  = np.zeros_like(X_train[0])
+    b_tmp  = 0.
+    alph = 0.1
+    iters = 10000
 
-w_range = np.array([-1, 7])
-b_range = np.array([1, -14])
-quad = plt_quad_logistic( x_train, y_train, w_range, b_range )
+    w_out, b_out, _ = gradient_descent(X_train, y_train, w_tmp, b_tmp, alph, iters) 
+    print(f"\nupdated parameters: w:{w_out}, b:{b_out}")
+
+    fig,ax = plt.subplots(1,1,figsize=(5,4))
+    # plot the probability 
+    plt_prob(ax, w_out, b_out)
+
+    # Plot the original data
+    ax.set_ylabel(r'$x_1$')
+    ax.set_xlabel(r'$x_0$')   
+    ax.axis([0, 4, 0, 3.5])
+    plot_data(X_train,y_train,ax)
+
+    # Plot the decision boundary
+    x0 = -b_out/w_out[0]
+    x1 = -b_out/w_out[1]
+    ax.plot([0,x0],[x1,0], c=dlc["dlblue"], lw=1)
+    plt.show()
+
+    x_train = np.array([0., 1, 2, 3, 4, 5])
+    y_train = np.array([0,  0, 0, 1, 1, 1])
+
+    fig,ax = plt.subplots(1,1,figsize=(4,3))
+    plt_tumor_data(x_train, y_train, ax)
+    plt.show()
+
+    w_range = np.array([-1, 7])
+    b_range = np.array([1, -14])
+    quad = plt_quad_logistic( x_train, y_train, w_range, b_range )
+
+if __name__ == "__main__":
+    main()
