@@ -3,12 +3,12 @@ import copy
 import time
 
 # Third-Party library Imports
-
-# Local Application Imports
 from ipywidgets import Output
-from machine_learning_specialization.supervised.classification.utils.lab_utils_common import np, plt, dlblue, dlorange, sigmoid, dldarkred, gradient_descent
 from matplotlib.patches import FancyArrowPatch
 from matplotlib.widgets import Button, CheckButtons
+
+# Local Application Imports
+from machine_learning_specialization.supervised.classification.utils.lab_utils_common import np, plt, dlblue, dlorange, sigmoid, dldarkred, gradient_descent
 
 # for debug
 #output = Output() # sends hidden error messages to display when using widgets

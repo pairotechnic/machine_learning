@@ -2,15 +2,19 @@
 plt_quad_logistic.py
     interactive plot and supporting routines showing logistic regression
 """
-
+# Standard Library Imports
 import time
+
+# Third-Party Library Imports
+from ipywidgets import Output
 from matplotlib import cm
 import matplotlib.colors as colors
 from matplotlib.gridspec import GridSpec
-from matplotlib.widgets import Button
 from matplotlib.patches import FancyArrowPatch
-from ipywidgets import Output
-from lab_utils_common import np, plt, dlc, dlcolors, sigmoid, compute_cost_matrix, gradient_descent
+from matplotlib.widgets import Button
+
+# Local Application Imports
+from machine_learning_specialization.supervised.classification.utils.lab_utils_common import np, plt, dlc, dlcolors, sigmoid, compute_cost_matrix, gradient_descent
 
 # for debug
 #output = Output() # sends hidden error messages to display when using widgets
@@ -56,6 +60,7 @@ class plt_quad_logistic:
         self.cid = fig.canvas.mpl_connect('button_press_event', self.click_contour)
         self.bcalc = Button(axcalc, 'Run Gradient Descent \nfrom current w,b (click)', color=dlc["dlorange"])
         self.bcalc.on_clicked(self.calc_logistic)
+        plt.show()
 
 #    @output.capture()  # debug
     def click_contour(self, event):
